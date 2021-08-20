@@ -3,12 +3,41 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Battleship Game</title>
+  <title>Морской бой</title>
+  <link rel="icon" type="image/x-icon" href="icon.png">
 <link href="styles.css?b50d37240044d4442b8c" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet" >
 <style type="text/css">
+h1 {
+  color: white;
+  margin: 50px;
+  font-size: 50px;
+}
+span {color: white;}
+h2{color: white;
+margin-bottom: 50px;
+}
+h3 {color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#min,#min2 {
+  color: white;
+
+}
+*{
+  margin:0px;
+  padding:0px;
+   box-sizing: border-box;
+}
 body{
 
-  background-color: #757578;}
+font-family: 'Manrope', sans-serif;
+letter-spacing: 5px;
+background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,102,182,1) 100%);}
  .greeny { background-color: #98FB98; }
 
  .red { background-color: #FA8072; }
@@ -16,20 +45,21 @@ body{
  table{
  /* background-image: url(https://kartinkin.com/uploads/posts/2021-01/1611483040_5-p-fon-more-s-vidom-sverkhu-5.jpg);  */
   border-spacing: 0px;
-  border-collapse: collapse;
+ 
  }
  .disable {
   pointer-events: none;
 }
-  tr, td {
-  padding: 0.6rem;
-  border: 1px solid black;
-  
-  }
+
   td {
-    width: 15px;
-    height: 15px;
+    width: 50px;
+    height: 50px;
     background-color: white;
+    text-align:center;
+    border:1px solid black;
+    text-align: center;
+   
+   
   }
   table:hover {
     cursor: pointer;
@@ -40,49 +70,173 @@ body{
   display: flex;
   justify-content: space-around;
   flex-direction: row-reverse;
+  flex-wrap: wrap-reverse;
 }
-h1{
-  
-  color: white; 
+
+.marker__row {
+    left: -40px;
+    top: -12px;
+    height: 0em;
+}
+.marker__col {
+  left: 2px;
+    top: -57px;
+    height: 0em;
+}
+.marker {
+    position: relative;
+    font-size: 20px;
+    color: white;
+font-weight: bold;
+}
+/* стили для окна */
+.popup-open {
+  display: inline-block;
+  padding: 15px 20px;
+  background: #000;
+  font-size: 16px;
+  text-decoration: none;
+  color: #fff;
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  margin-left: -76px;
+}
+
+.popup-fade {
+  display: none;
+}
+.popup-fade:before {
+  content: '';
+  background: #000;
+  position: fixed; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  opacity: 0.7;
+  z-index: 9999;
+}
+.popup {
+  color: white;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  padding: 20px;
+  width: 360px;
+  margin-left: -200px;  
+  background: rgb(0,0,0);
+background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,102,182,1) 100%);
+  border: 1px solid white;
+  border-radius: 10px; 
+  z-index: 99999;
+  opacity: 1; 
+}
+.popup-close {
+ /* position: absolute;
+  top: 10px;
+  right: 10px;
+  */
+}
+
+/* Кнопка в бой */
+button.popup-close{
+  width: 100px; 
+  height: 50px; 
+  background: black;
+  cursor: pointer;
+  color: white;
+  border: none;
+  font-size: 20px;
+  border-radius: 10px; 
 }
 </style>
 </head>
-
 <body>
+  <!-- Первое окно 
+  <a class="popup-open" href="#">Открыть popup</a>
+-->
+<div class="popup-fade" style="display: block">
+  <form id="form" onsubmit="return false;">
+  <div class="popup">
+ 
+       <p style="text-align:justify"> «Морской бой» — игра для двух участников, в которой игроки по очереди называют координаты на неизвестной им карте соперника. Если у соперника по этим координатам имеется корабль (координаты заняты), то корабль или его часть «топится», а попавший получает право сделать ещё один ход. Цель игрока — первым потопить все корабли противника.</p>
+          <center>
+            <br>
+    Ваше имя: <input required class="i-1">
+ <br>
+   <br>
+   <!-- Количество кораблей: <input class="i-2"> -->
+  </center><br>
+    <center>
+    <button  id="onclick_v_javascript" class="popup-close" type="submit" >В бой!  </button>
+    </center>
+  </div> 
+  </form>   
+</div>
+<script type="text/javascript">
+document.querySelector('button').addEventListener('click', myClick);
+function myClick() {
+    username = document.querySelector('.i-1').value;
+ //   ships = document.querySelector('.i-2').value;
+    document.getElementById("hod").innerHTML = username;
+ // console.log(username);
+    }
+
+</script>
+
+<script src="https://yandex.st/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$(document).ready(function($) {
+  $('.popup-open').click(function() {
+    $('.popup-fade').fadeIn();
+    return false;
+  }); 
+  
+  $('.popup-close').click(function() {
+    $(this).parents('.popup-fade').fadeOut();
+    return false;
+  });   
+
+  $(document).keydown(function(e) {
+    if (e.keyCode === 27) {
+      e.stopPropagation();
+      $('.popup-fade').fadeOut();
+    }
+  });
+//Клик вне поля  
+  $('.popup-fade').click(function(e) {
+    if ($(e.target).closest('.popup').length == 0) {
+      $(this).fadeOut();          
+    }
+  }); 
+});
+</script>
+
 
 <center>
+
+
 <h1>Морской бой</h1>
-<h1 id="">Ход - <div id="hod" style ="display: contents">ваш</div> </h1>
+<h2><div id="hod" style ="display: contents"></div> ходит</h2>
 </center>
 <div class="container">
-  <div>
+  <div style="margin:25px;">
 <table id="grid">
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><div class="marker marker__row">1</div><div class="marker marker__col">А</div></td>
+    <td><div class="marker marker__col">Б</div></td>
+    <td><div class="marker marker__col">В</div></td>
+    <td><div class="marker marker__col">Г</div></td>
+    <td><div class="marker marker__col">Д</div></td>
+    <td><div class="marker marker__col">Е</div></td>
+    <td><div class="marker marker__col">Ж</div></td>
+    <td><div class="marker marker__col">З</div></td>
+    <td><div class="marker marker__col">И</div></td>
+    <td><div class="marker marker__col">К</div></td>
   </tr>
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+    <td><div class="marker marker__row">2</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -94,19 +248,7 @@ h1{
     <td></td>
   </tr>
     <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+    <td><div class="marker marker__row">3</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -118,19 +260,7 @@ h1{
     <td></td>
   </tr>
     <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+    <td><div class="marker marker__row">4</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -142,19 +272,7 @@ h1{
     <td></td>
   </tr>
     <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+    <td><div class="marker marker__row">5</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -166,7 +284,55 @@ h1{
     <td></td>
   </tr>
     <tr>
+    <td><div class="marker marker__row">6</div></td>
     <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">7</div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">8</div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">9</div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">10</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -178,36 +344,24 @@ h1{
     <td></td>
   </tr>
 </table>
-<h1 id="time">Кораблей противника  - <div id="min" style ="display: contents"></div> </h1> 
+<h3 id="time">Поле противника</h3>  <span>Осталось кораблей - </span><div id="min" style ="display: contents"></div> 
 </div>
-<div>
+<div style="margin:25px;">
 <table id="grid2">
   <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+    <td><div class="marker marker__row">1</div><div class="marker marker__col">А</div></td>
+    <td><div class="marker marker__col">Б</div></td>
+    <td><div class="marker marker__col">В</div></td>
+    <td><div class="marker marker__col">Г</div></td>
+    <td><div class="marker marker__col">Д</div></td>
+    <td><div class="marker marker__col">Е</div></td>
+    <td><div class="marker marker__col">Ж</div></td>
+    <td><div class="marker marker__col">З</div></td>
+    <td><div class="marker marker__col">И</div></td>
+    <td><div class="marker marker__col">К</div></td>
   </tr>
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+ <tr>
+    <td><div class="marker marker__row">2</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -219,19 +373,7 @@ h1{
     <td></td>
   </tr>
     <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+    <td><div class="marker marker__row">3</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -243,19 +385,7 @@ h1{
     <td></td>
   </tr>
     <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+    <td><div class="marker marker__row">4</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -267,19 +397,7 @@ h1{
     <td></td>
   </tr>
     <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
-    <tr>
-    <td></td>
+    <td><div class="marker marker__row">5</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -291,7 +409,55 @@ h1{
     <td></td>
   </tr>
     <tr>
+    <td><div class="marker marker__row">6</div></td>
     <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">7</div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">8</div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">9</div></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td><div class="marker marker__row">10</div></td>
     <td></td>
     <td></td>
     <td></td>
@@ -303,16 +469,13 @@ h1{
     <td></td>
   </tr>
 </table>
-<h1 id="time">Мои корабли  - <div id="min2" style ="display: contents"></div> </h1> 
+<h3 id="time">Ваше поле</h3> <span>Осталось кораблей - </span><div id="min2" style ="display: contents"></div> 
 </div>
 </div>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <script type="text/javascript">
 
-   var count3=10;
-
+   var count3 = 10;
   //Массив противника
     let arr = new Array();
     var count;
@@ -341,9 +504,9 @@ h1{
       count++;
     } 
   }
-    console.log(arr);
+  //  console.log(arr);
     document.getElementById("min").innerHTML = count; 
-    console.log(count);
+   
 
   //Мой массив
   let arr2 = new Array();
@@ -354,7 +517,7 @@ h1{
     for (let j=0; j < 10; j++){
     arr2[i][j]=0;
     if (arr2[i][j] == 1) { count2++;
-     // document.getElementById('grid2').rows[i].cells[j].classList.add('blue');
+
 };
     }
     }
@@ -375,16 +538,13 @@ h1{
       count2++;
     } 
   }
-    console.log(arr2);
+ //   console.log(arr2);
     document.getElementById("min2").innerHTML = count2; 
-   
-   // document.getElementById("hod").innerHTML = "ваш";
     document.getElementsByTagName('table')[0].addEventListener('click', function(e) {
-
    // alert("My position in table is: " + "x - " + e.target.parentElement.rowIndex + "y - " +  e.target.cellIndex );
     console.log(arr[e.target.parentElement.rowIndex][e.target.cellIndex]);   //Выводит значение по которому нажали
-grid.classList.add('disable');
 
+    grid.classList.add('disable');
                   if (arr[e.target.parentElement.rowIndex][e.target.cellIndex] ==1){                 
                       console.log('Попал!')
                       document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].classList.add('red');
@@ -395,27 +555,30 @@ grid.classList.add('disable');
                        grid.classList.remove('disable');      
                 }
                 else {                 
-                  console.log('Мимо!');
-                document.getElementById("hod").innerHTML = "противника";
-                setTimeout(function () {
-                  document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].classList.add('disable'); 
-                   document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].style.opacity ='0';
-                  while(true){
-                	var rand = Math.floor(Math.random() * arr2.length);
-                	var rand2 = Math.floor(Math.random() * arr2[0].length); // случайные координаты
-                	console.log('rand '+rand)
-                	console.log('rand2 '+rand2)
-                	if (!document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('red') && !document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('disable')){ // если клетка НЕ красная, то стреляем по ней, иначе переходим на следующую итерацию и пробуем другие координаты
-                		if(document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('blue')){ // клетка синяя, значит, противник попал
-                			document.getElementById('grid2').rows[rand].cells[rand2].classList.remove('blue');
-                			document.getElementById('grid2').rows[rand].cells[rand2].classList.add('red');
-                			count2--;
-                      document.getElementById("min2").innerHTML = count2; 
-   
+                      console.log('Мимо!');
+                      document.getElementById("hod").innerHTML = "противник";
+                      setTimeout(function () {
+
+                      document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].classList.add('disable');
+                      document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].innerHTML += '<div style ="position: relative; font-size: 50px;color: black;font-weight: bold; left: 2px; top: -35px; height: 0em;" >•</div>'; 
+                      //document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].style.opacity ='0';
+                      while(true){
+                    	var rand = Math.floor(Math.random() * arr2.length);
+                    	var rand2 = Math.floor(Math.random() * arr2[0].length); // случайные координаты
+                    	console.log('rand '+rand)
+                    	console.log('rand2 '+rand2)
+                    	if (!document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('red') && !document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('disable')){ // если клетка НЕ красная, то стреляем по ней, иначе переходим на следующую итерацию и пробуем другие координаты
+                		      if(document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('blue')){ // клетка синяя, значит, противник попал
+                        			document.getElementById('grid2').rows[rand].cells[rand2].classList.remove('blue');
+                        			document.getElementById('grid2').rows[rand].cells[rand2].classList.add('red');
+                        			count2--;
+                              document.getElementById("min2").innerHTML = count2;  
                 		} else { // клетка не синяя и не красная, значит противник промахнулся
                 	  document.getElementById('grid2').rows[rand].cells[rand2].classList.add('disable'); 
-                		document.getElementById('grid2').rows[rand].cells[rand2].style.opacity ='0';
-                    document.getElementById("hod").innerHTML = "ваш"; 
+                		//document.getElementById('grid2').rows[rand].cells[rand2].style.opacity ='0';
+                    document.getElementById('grid2').rows[rand].cells[rand2].innerHTML += '<div style ="position: relative; font-size: 50px;color: black;font-weight: bold; left: 2px; top: -35px; height: 0em;" >•</div>';
+                    //
+                    document.getElementById("hod").innerHTML = username; 
                      grid.classList.remove('disable');
                     break;
                 		}
