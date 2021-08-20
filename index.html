@@ -10,6 +10,10 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200&display=swap" rel="stylesheet" >
 <style type="text/css">
+p {
+  text-indent: 30px;
+
+}
 h1 {
   color: white;
   margin: 50px;
@@ -31,11 +35,12 @@ h3 {color: white;
   margin:0px;
   padding:0px;
    box-sizing: border-box;
+   font-family: 'Manrope', sans-serif;
+   letter-spacing: 2px;
 }
 body{
 
-font-family: 'Manrope', sans-serif;
-letter-spacing: 5px;
+
 background: rgb(0,0,0);
 background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,102,182,1) 100%);}
  .greeny { background-color: #98FB98; }
@@ -45,6 +50,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,102,182,1) 100%);}
  table{
  /* background-image: url(https://kartinkin.com/uploads/posts/2021-01/1611483040_5-p-fon-more-s-vidom-sverkhu-5.jpg);  */
   border-spacing: 0px;
+  box-shadow: 0px 0px 11px 9px rgba(0, 0, 0, 0.2);
  
  }
  .disable {
@@ -123,7 +129,7 @@ font-weight: bold;
   top: 20%;
   left: 50%;
   padding: 20px;
-  width: 360px;
+  width: 400px;
   margin-left: -200px;  
   background: rgb(0,0,0);
 background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,102,182,1) 100%);
@@ -131,6 +137,7 @@ background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,102,182,1) 100%);
   border-radius: 10px; 
   z-index: 99999;
   opacity: 1; 
+  font-size: 15px;
 }
 .popup-close {
  /* position: absolute;
@@ -150,6 +157,33 @@ button.popup-close{
   font-size: 20px;
   border-radius: 10px; 
 }
+button.popup-close:hover{
+  width: 100px; 
+  height: 50px; 
+  background: black;
+  cursor: pointer;
+  color: white;
+  border: none;
+  font-size: 20px;
+  border-radius: 10px; 
+  border: 1px solid white;
+  box-shadow: 0px 0px 11px 9px rgba(0, 0, 0, 0.2);
+}
+.i-1{
+  border:0;
+   padding:10px;
+  border-radius:10px;
+  font-size: 20px;
+  margin: 10px;
+outline: none;
+}
+.i-1:hover{
+    outline: none;
+box-shadow: 0px 0px 11px 9px rgba(0, 0, 0, 0.2);
+}.i-1:active{
+    outline: none;
+box-shadow: 0px 0px 11px 9px rgba(0, 0, 0, 0.2);
+}
 </style>
 </head>
 <body>
@@ -160,10 +194,11 @@ button.popup-close{
   <form id="form" onsubmit="return false;">
   <div class="popup">
  
-       <p style="text-align:justify"> «Морской бой» — игра для двух участников, в которой игроки по очереди называют координаты на неизвестной им карте соперника. Если у соперника по этим координатам имеется корабль (координаты заняты), то корабль или его часть «топится», а попавший получает право сделать ещё один ход. Цель игрока — первым потопить все корабли противника.</p>
+       <h3 style="text-align: center;">«Морской бой»</h3> <p> — игра для двух участников, в которой игроки по очереди называют координаты на неизвестной им карте соперника. </p>
+     <p>Если у соперника по этим координатам имеется корабль (координаты заняты), то корабль или его часть «топится», а попавший получает право сделать ещё один ход.</p><p> Цель игрока — первым потопить все корабли противника.</p>
           <center>
             <br>
-    Ваше имя: <input required class="i-1">
+    Ваше имя:<input required class="i-1">
  <br>
    <br>
    <!-- Количество кораблей: <input class="i-2"> -->
@@ -179,7 +214,8 @@ document.querySelector('button').addEventListener('click', myClick);
 function myClick() {
     username = document.querySelector('.i-1').value;
  //   ships = document.querySelector('.i-2').value;
-    document.getElementById("hod").innerHTML = username;
+    
+    if (username=="") { username = "Ваш флот"} else {document.getElementById("hod").innerHTML = username;}
  // console.log(username);
     }
 
@@ -218,7 +254,7 @@ $(document).ready(function($) {
 
 
 <h1>Морской бой</h1>
-<h2><div id="hod" style ="display: contents"></div> ходит</h2>
+<h2><div id="hod" style ="display: contents">Ваш флот</div> ходит</h2>
 </center>
 <div class="container">
   <div style="margin:25px;">
