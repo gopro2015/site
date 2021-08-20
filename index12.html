@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Battleship Game</title>
+<link href="styles.css?b50d37240044d4442b8c" rel="stylesheet">
+<style type="text/css">
+body{
+
+  background-color: #757578;}
+ .greeny { background-color: #98FB98; }
+
+ .red { background-color: #FA8072; }
+ .blue { background-color: #42aaff; }
+ table{
+ /* background-image: url(https://kartinkin.com/uploads/posts/2021-01/1611483040_5-p-fon-more-s-vidom-sverkhu-5.jpg);  */
+  border-spacing: 0px;
+  border-collapse: collapse;
+ }
+ .disable {
+  pointer-events: none;
+}
+  tr, td {
+  padding: 0.6rem;
+  border: 1px solid black;
+  
+  }
+  td {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+  }
+  table:hover {
+    cursor: pointer;
+
+  }
+
+  .container {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row-reverse;
+}
+h1{
+  
+  color: white; 
+}
+</style>
+</head>
+
+<body>
+
+<center>
+<h1>Морской бой</h1>
+<h1 id="">Ход - <div id="hod" style ="display: contents">ваш</div> </h1>
+</center>
+<div class="container">
+  <div>
+<table id="grid">
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<h1 id="time">Кораблей противника  - <div id="min" style ="display: contents"></div> </h1> 
+</div>
+<div>
+<table id="grid2">
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+<h1 id="time">Мои корабли  - <div id="min2" style ="display: contents"></div> </h1> 
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+   var count3=10;
+
+  //Массив противника
+    let arr = new Array();
+    var count;
+    count =0;
+    for (let i=0; i < 10; i++) {
+    arr[i] = new Array();
+    for (let j=0; j < 10; j++){
+    arr[i][j]=0;
+    if (arr[i][j] == 1) { count++};
+    }
+    }
+    
+  var cnt = 0;
+  while(count3 > cnt){
+  var rand = Math.floor(Math.random() * arr.length);
+  var rand2 = Math.floor(Math.random() * arr[0].length); // случайные координаты
+  console.log('rand '+rand)
+  console.log('rand2 '+rand2)
+
+    if(arr[rand][rand2] == 1){
+
+    } else {
+      arr[rand][rand2] = 1;
+    //  document.getElementById('grid2').rows[rand].cells[rand2].classList.add('blue');
+      cnt++;
+      count++;
+    } 
+  }
+    console.log(arr);
+    document.getElementById("min").innerHTML = count; 
+    console.log(count);
+
+  //Мой массив
+  let arr2 = new Array();
+    var count2;
+    count2 =0;
+    for (let i=0; i < 10; i++) {
+    arr2[i] = new Array();
+    for (let j=0; j < 10; j++){
+    arr2[i][j]=0;
+    if (arr2[i][j] == 1) { count2++;
+     // document.getElementById('grid2').rows[i].cells[j].classList.add('blue');
+};
+    }
+    }
+
+  var cnt2 = 0;
+  while(count3 > cnt2){
+  var rand = Math.floor(Math.random() * arr2.length);
+  var rand2 = Math.floor(Math.random() * arr2[0].length); // случайные координаты
+  console.log('rand '+rand)
+  console.log('rand2 '+rand2)
+
+    if(arr2[rand][rand2] == 1){
+
+    } else {
+      arr2[rand][rand2] = 1;
+      document.getElementById('grid2').rows[rand].cells[rand2].classList.add('blue');
+      cnt2++;
+      count2++;
+    } 
+  }
+    console.log(arr2);
+    document.getElementById("min2").innerHTML = count2; 
+   
+   // document.getElementById("hod").innerHTML = "ваш";
+    document.getElementsByTagName('table')[0].addEventListener('click', function(e) {
+
+   // alert("My position in table is: " + "x - " + e.target.parentElement.rowIndex + "y - " +  e.target.cellIndex );
+    console.log(arr[e.target.parentElement.rowIndex][e.target.cellIndex]);   //Выводит значение по которому нажали
+grid.classList.add('disable');
+
+                  if (arr[e.target.parentElement.rowIndex][e.target.cellIndex] ==1){                 
+                      console.log('Попал!')
+                      document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].classList.add('red');
+                      document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].classList.add('disable');
+                      count--;
+                      document.getElementById("min").innerHTML = count; 
+                      console.log('У противника осталось: ' + count);  
+                       grid.classList.remove('disable');      
+                }
+                else {                 
+                  console.log('Мимо!');
+                document.getElementById("hod").innerHTML = "противника";
+                setTimeout(function () {
+                  document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].classList.add('disable'); 
+                   document.getElementById('grid').rows[e.target.parentElement.rowIndex].cells[e.target.cellIndex].style.opacity ='0';
+                  while(true){
+                	var rand = Math.floor(Math.random() * arr2.length);
+                	var rand2 = Math.floor(Math.random() * arr2[0].length); // случайные координаты
+                	console.log('rand '+rand)
+                	console.log('rand2 '+rand2)
+                	if (!document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('red') && !document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('disable')){ // если клетка НЕ красная, то стреляем по ней, иначе переходим на следующую итерацию и пробуем другие координаты
+                		if(document.getElementById('grid2').rows[rand].cells[rand2].classList.contains('blue')){ // клетка синяя, значит, противник попал
+                			document.getElementById('grid2').rows[rand].cells[rand2].classList.remove('blue');
+                			document.getElementById('grid2').rows[rand].cells[rand2].classList.add('red');
+                			count2--;
+                      document.getElementById("min2").innerHTML = count2; 
+   
+                		} else { // клетка не синяя и не красная, значит противник промахнулся
+                	  document.getElementById('grid2').rows[rand].cells[rand2].classList.add('disable'); 
+                		document.getElementById('grid2').rows[rand].cells[rand2].style.opacity ='0';
+                    document.getElementById("hod").innerHTML = "ваш"; 
+                     grid.classList.remove('disable');
+                    break;
+                		}
+                	}
+                	};
+                
+                },1000) 
+}
+	if (count==0) {
+		alert('Вы выиграли!');
+  
+  location.reload();
+}
+	else if(count2==0) {
+		alert('Вы проиграли!');
+    location.reload();
+  }
+    }, false);  
+</script>
+</html>
